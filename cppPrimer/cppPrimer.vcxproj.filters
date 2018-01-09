@@ -24,12 +24,48 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ch3progex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ch4progex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ch5progex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ch6progex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ch7progex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ch8progex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cppPrimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ch3progex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ch4progex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ch5progex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ch6progex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ch7progex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ch8progex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

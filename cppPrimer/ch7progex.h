@@ -1,0 +1,10 @@
+#pragma once
+void ex7_1(void);
+void ex7_2(void);
+void ex7_3(void);
+void ex7_4(void);
+void ex7_5(void);
+void ex7_6(void);
+void ex7_7(void);
+void ex7_8(void);
+void ex7_9(void);

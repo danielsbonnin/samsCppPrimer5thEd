@@ -1,0 +1,4 @@
+This is a sample text file for ex6_8.
+
+I skipped a line; hopefully that is reflected in the terminal.
+And the ending should be right here --->
