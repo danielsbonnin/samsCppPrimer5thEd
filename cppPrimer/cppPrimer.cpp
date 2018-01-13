@@ -7,19 +7,21 @@
 #include "ch6progex.h"
 #include "ch7progex.h"
 #include "ch8progex.h"
+#include "ch9progex.h"
 #include <iostream>
 #include <cstring>
 #include <string>
 #include <ctime>
 #include <fstream>
 #include <cstdlib>
-
+#include <new>
 using namespace std;
 
 int main(void)
 {
-	ex8_7();
+	ex9_4();
 	cin.get();
 	cin.get();
 	return 0;
 }
+

@@ -42,6 +42,18 @@
     <ClInclude Include="ch8progex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ch9progex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="golf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="golf2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sales.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -66,6 +78,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ch8progex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ch9progex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="golf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="golf2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sales.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

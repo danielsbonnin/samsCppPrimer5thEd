@@ -352,6 +352,7 @@ T ShowArray(T arr[], int n)
 		sum += arr[i];
 	return sum;
 }
+
 template <typename T>
 T ShowArray(T * arr[], int n)
 {
