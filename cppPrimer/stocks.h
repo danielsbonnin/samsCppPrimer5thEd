@@ -17,4 +17,8 @@ public:
 	void sell(int num, double price);
 	void update(double price);
 	void show();
+	const char * getCompany() const;
+	int getShares() const;
+	double getShareVal() const;
+	double getTotalVal() const;
 };    // note semicolon at the end

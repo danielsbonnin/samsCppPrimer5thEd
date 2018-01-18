@@ -145,6 +145,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Account.h" />
     <ClInclude Include="ch3progex.h" />
     <ClInclude Include="ch4progex.h" />
     <ClInclude Include="ch5progex.h" />
@@ -154,12 +155,20 @@
     <ClInclude Include="ch9progex.h" />
     <ClInclude Include="golf.h" />
     <ClInclude Include="golf2.h" />
+    <ClInclude Include="ch10progex.h" />
+    <ClInclude Include="Golf3.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="Plorg.h" />
     <ClInclude Include="sales.h" />
+    <ClInclude Include="Sales1.h" />
+    <ClInclude Include="stack.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="stocks.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Account.cpp" />
+    <ClCompile Include="ch10progex.cpp" />
     <ClCompile Include="ch8progex.cpp" />
     <ClCompile Include="ch9progex.cpp" />
     <ClCompile Include="cppPrimer.cpp" />
@@ -170,7 +179,12 @@
     <ClCompile Include="ch7progex.cpp" />
     <ClCompile Include="golf.cpp" />
     <ClCompile Include="golf2.cpp" />
+    <ClCompile Include="Golf3.cpp" />
+    <ClCompile Include="List.cpp" />
+    <ClCompile Include="Plorg.cpp" />
     <ClCompile Include="sales.cpp" />
+    <ClCompile Include="Sales1.cpp" />
+    <ClCompile Include="stack.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

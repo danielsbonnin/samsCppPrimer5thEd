@@ -110,3 +110,22 @@ const Stock & Stock::topval(const Stock & s) const
 	else
 		return *this;      // invoking object
 }
+
+const char * Stock::getCompany() const
+{
+	const char * ptr;
+	ptr = company;
+	return ptr;
+}
+int Stock::getShares() const
+{
+	return shares;
+}
+double Stock::getShareVal() const
+{
+	return share_val;
+}
+double Stock::getTotalVal() const
+{
+	return total_val;
+}
