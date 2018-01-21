@@ -1,0 +1,5 @@
+After 3291 steps, the subject has the following location:
+(x, y) = (11.028, 100.169)
+ or
+(m,a) = (100.774, 83.7174)
+Average outward distance per step = 0.0306212
