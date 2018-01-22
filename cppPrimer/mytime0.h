@@ -11,10 +11,10 @@ public:
 	void AddMin(int m);
 	void AddHr(int h);
 	void Reset(int h = 0, int m = 0);
-	Time operator+(const Time & t) const;
-	Time operator-(const Time & t) const;
+	friend Time operator+(const Time & x, const Time & y);
+	friend Time operator-(const Time & x, const Time & y);
 	Time operator*(double n) const;
-	friend Time operator*(double m, const Time & t);
+	friend Time operator*(double n, const Time & t);
 	friend std::ostream & operator<<(std::ostream & os, const Time & t);
 	void Show() const;
 	~Time();

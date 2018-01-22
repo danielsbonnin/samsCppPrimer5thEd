@@ -12,26 +12,28 @@ const double Rad_to_deg = 57.2957795130823;
 
 // private methods
 // calculates magnitude from x and y
-void Vector::set_mag()
+double Vector::magval() const
 {
-	mag = sqrt(x * x + y * y);
+	return sqrt(x * x + y * y);
 }
 
-void Vector::set_ang()
+double Vector::angval() const
 {
+	double ang;
 	if (x == 0.0 && y == 0.0)
 		ang = 0.0;
 	else
 		ang = atan2(y, x);
+	return ang;
 }
 // set x from polar coordinate
-void Vector::set_x()
+void Vector::set_x(double mag, double ang)
 {
 	x = mag * cos(ang);
 }
 
 // set y from polar coordinate
-void Vector::set_y()
+void Vector::set_y(double mag, double ang)
 {
 	y = mag * sin(ang);
 }
@@ -39,7 +41,7 @@ void Vector::set_y()
 // public methods
 Vector::Vector()          // default constructor
 {
-	x = y = mag = ang = 0.0;
+	x = y = 0.0;
 	mode = 'r';
 }
 
@@ -52,21 +54,17 @@ Vector::Vector(double n1, double n2, char form)
 	{
 		x = n1;
 		y = n2;
-		set_mag();
-		set_ang();
 	}
 	else if (form == 'p')
 	{
-		mag = n1;
-		ang = n2 / Rad_to_deg;
-		set_x();
-		set_y();
+		set_x(n1, n2 / Rad_to_deg);
+		set_y(n1, n2 / Rad_to_deg);
 	}
 	else
 	{
 		cout << "Incorrect 3rd argument to Vector() -- ";
 		cout << "vector set to 0\n";
-		x = y = mag = ang = 0.0;
+		x = y = 0.0;
 		mode = 'r';
 	}
 }
@@ -80,21 +78,17 @@ void Vector::set(double n1, double n2, char form)
 	{
 		x = n1;
 		y = n2;
-		set_mag();
-		set_ang();
 	}
 	else if (form == 'p')
 	{
-		mag = n1;
-		ang = n2 / Rad_to_deg;
-		set_x();
-		set_y();
+		set_x(n1 , n2 / Rad_to_deg);
+		set_y(n1, n2 / Rad_to_deg);
 	}
 	else
 	{
 		cout << "Incorrect 3rd argument to Vector() -- ";
 		cout << "vector set to 0\n";
-		x = y = mag = ang = 0.0;
+		x = y = 0.0;
 		mode = 'r';
 	}
 }
@@ -153,11 +147,17 @@ std::ostream & operator<<(std::ostream & os, const Vector & v)
 		os << "(x, y) = (" << v.x << ", " << v.y << ")";
 	else if (v.mode == 'p')
 	{
-		os << "(m,a) = (" << v.mag << ", "
-			<< v.ang * Rad_to_deg << ")";
+		os << "(m,a) = (" << v.magval() << ", "
+			<< v.angval() * Rad_to_deg << ")";
 	}
 	else
 		os << "Vector object mode is invalid";
 	return os;
+}
+
+// conversion functions
+Vector::operator double() const
+{
+	return magval();
 }
 }  // end namespace VECTOR

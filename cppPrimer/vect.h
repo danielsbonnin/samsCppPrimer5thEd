@@ -6,14 +6,13 @@ namespace VECTOR {
 	private:
 		double x;          // horizontal value
 		double y;          // vertical value
-		double mag;        // length of vector
-		double ang;        // direction of vector
+		//double mag;        // length of vector
+		//double ang;        // direction of vector
 		char mode;         // 'r' = rectangular, 'p' = polar
+
 	// private methods for setting values
-		void set_mag();
-		void set_ang();
-		void set_x();
-		void set_y();
+		void set_x(double mag, double ang);
+		void set_y(double mag, double ang);
 	public:
 		Vector();
 		Vector(double n1, double n2, char form = 'r');
@@ -21,8 +20,8 @@ namespace VECTOR {
 		~Vector();
 		double xval() const { return x; }      // report x value
 		double yval() const { return y; }      // report y value
-		double magval() const { return mag; }  // report magnitude
-		double angval() const { return ang; }  // report angle
+		double magval() const;                 // report magnitude
+		double angval() const;                 // report angle
 		void polar_mode();                     // set mode to 'p'
 		void rect_mode();                      // set mode to 'r'
 	// operator overloading
@@ -33,6 +32,8 @@ namespace VECTOR {
 	// friends
 		friend Vector operator*(double n, const Vector & a);
 		friend std::ostream & operator<<(std::ostream & os, const Vector & v);
+	// conversion functions
+		operator double() const;
 	};
 }    // end namespace VECTOR
 

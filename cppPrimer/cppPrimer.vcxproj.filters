@@ -84,6 +84,12 @@
     <ClInclude Include="vect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="stonewt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ch11progex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -150,6 +156,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="vect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stonewt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ch11progex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

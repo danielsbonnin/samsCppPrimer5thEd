@@ -31,23 +31,23 @@ void Time::Reset(int h, int m)
 	minutes = m;
 }
 
-Time Time::operator+(const Time & t) const
+Time operator+(const Time & x, const Time & y)
 {
 	Time sum;
-	sum.minutes = minutes + t.minutes;
-	sum.hours = hours + t.hours + sum.minutes / 60;
+	sum.minutes = x.minutes + y.minutes;
+	sum.hours = x.hours + y.hours + sum.minutes / 60;
 	sum.minutes %= 60;
 	return sum;
 }
 
-Time Time::operator-(const Time & t) const
+Time operator-(const Time & x, const Time & y)
 {
 	Time diff;
 	int tot1, tot2;
-	tot1 = t.minutes + 60 * t.hours;
-	tot2 = minutes + 60 * hours;
-	diff.minutes = (tot2 - tot1) % 60;
-	diff.hours = (tot2 - tot1) / 60;
+	tot1 = x.minutes + 60 * x.hours;
+	tot2 = y.minutes + 60 * y.hours;
+	diff.minutes = (tot1 - tot2) % 60;
+	diff.hours = (tot1 - tot2) / 60;
 	return diff;
 }
 
