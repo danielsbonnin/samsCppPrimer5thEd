@@ -23,6 +23,12 @@ public:
 	friend Stonewt operator*(double x, const Stonewt & y);
 	Stonewt operator+(const Stonewt &) const;
 	Stonewt operator-(const Stonewt &) const;
+	bool operator<(const Stonewt & x) const { return pounds < x.pounds; }
+	bool operator>(const Stonewt & x) const { return pounds > x.pounds; }
+	bool operator==(const Stonewt & x) const { return pounds == x.pounds; }
+	bool operator<=(const Stonewt & x) const { return pounds <= x.pounds; }
+	bool operator>=(const Stonewt & x) const { return pounds >= x.pounds; }
+	bool operator!=(const Stonewt & x) const { return pounds != x.pounds; }
 // conversion functions
 	operator int() const;
 	operator double() const;

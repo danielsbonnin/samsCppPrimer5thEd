@@ -90,6 +90,9 @@
     <ClInclude Include="ch11progex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="complex0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -162,6 +165,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ch11progex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="complex0.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

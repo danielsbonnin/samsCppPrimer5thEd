@@ -3,6 +3,7 @@
 #include "stonewt.h"
 #include "vect.h"
 #include "mytime0.h"
+#include "complex0.h"  // to avoid confusion with complex.h
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
@@ -165,9 +166,59 @@ void ex11_5()
 }
 void ex11_6()
 {
+	Stonewt arr[6] = { 10, 20, 30 };
+	for (int i = 0; i < 6; ++i)
+		cout << arr[i] << endl;
+	int i = 3;
+	double lbsInput = 0;
+	while (i < 6)
+	{
+		cout << "Enter a weight in lbs: ";
+		while (!(cin >> lbsInput) || lbsInput < 0.0)
+			cout << "Enter a weight in lbs: ";
+		arr[i] = Stonewt(lbsInput);
+		i += 1;
+	}
+	Stonewt smallest = double(1 << 16);
+	Stonewt largest = 0.0;
+	Stonewt comp(11, 0);
+	int lgrThanComp = 0;
+	for (int i = 0; i < 6; ++i)
+	{
+		smallest = arr[i] < smallest ? arr[i] : smallest;
+		largest = arr[i] > largest ? arr[i] : largest;
+		if (arr[i] >= comp)
+		{
+			lgrThanComp += 1;
+			cout << arr[i] << " is larger than " << comp << endl;
+		}
+	}
+	cout << "*** Printing list of weights ***" << endl;
+	for (int i = 0; i < 6; ++i)
+		cout << arr[i] << endl;
+	cout << "*** Finished printing ***" << endl;
 
+	cout << "Smallest: " << smallest << endl;
+	cout << "Largest: " << largest << endl;
+	cout << "There are " << lgrThanComp << " Stonewts >= " << comp << ".\n";
+	cout << "Bye!" << endl;
 }
 void ex11_7()
 {
-
+	complex0 c;
+	complex0 a(3.0, 4.0);    // initialize to (3, 4i)
+	cout << "Enter a complex number (q to quit):\n";
+	while (cin >> c)
+	{
+		cout << "c is " << c << endl;
+		cout << "complex conjugate is " << ~c << endl;
+		cout << "a is " << a << "\n";
+		cout << "a + c is " << a + c << '\n';
+		cout << "a - c is " << a - c << '\n';
+		cout << "a * c is " << a * c << '\n';
+		cout << "2 * c is " << 2 * c << '\n';
+		cout << "Enter a complex number (q to quit):\n";
+	}
+	cout << "Done!\n";
+	return;
 }

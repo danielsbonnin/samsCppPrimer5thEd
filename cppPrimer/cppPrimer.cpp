@@ -26,7 +26,7 @@ using namespace std;
 
 int main(void)
 {
-	ex11_5();
+	ex11_7();
 	cin.get();
 	cin.get();
 	return 0;
