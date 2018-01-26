@@ -18,67 +18,99 @@
 #include <cstdlib>
 #include <new>
 #include "stocks.h"
-#include "stack.h"
 #include "mytime0.h"
 #include "vect.h"
 #include "stonewt.h"
 #include "stringGood.h"
+#include "Queue.h"
+const int MIN_PER_HR = 60;
+
+bool newcustomer(double x);  // is there a new customer?
+
 using namespace std;
 
-const int BUF = 512;
-
-class JustTesting
-{
-private:
-	stringGood words;
-	int number;
-public:
-	JustTesting(const stringGood & s = "Just Testing", int n = 0)
-	{
-		words = s; number = n; cout << words << " constructed\n";
-	}
-	~JustTesting() { cout << words << " destroyed\n"; }
-	void Show() const { cout << words << ", " << number << endl; }
-};
 int main(void)
 {
-	char * buffer = new char[BUF];        // get a block of memory
+// setting things up
+	srand(time(0));      // random initializing of rand()
 
-	JustTesting *pc1, *pc2;
+	cout << "Case Study: Bank of Heather Automatic Teller\n";
+	cout << "Enter maximum size of queue: ";
+	int qs;
+	cin >> qs;
+	Queue line(qs);      // line queue holds up to qs people
 
-	pc1 = new (buffer) JustTesting;      // place object in buffer
-	pc2 = new JustTesting("Heap1", 20);  // place object on heap
+	cout << "Enter the number of sumulation hours: ";
+	int hours;           // hours of simulation
+	cin >> hours;
+	// simulation will run 1 cycle per minute
+	long cyclelimit = MIN_PER_HR * hours; // # of cycles
 
-	cout << "Memory block addresses:\n" << "buffer: "
-		<< (void *)buffer << "    heap: " << pc2 << endl;
-	cout << "Memory contents:\n";
-	cout << pc1 << ": ";
-	pc1->Show();
-	cout << pc2 << ": ";
-	pc2->Show();
+	cout << "Enter the average number of customers per hour: ";
+	double perhour;       // average # of arrival per hour
+	cin >> perhour;
+	double min_per_cust;  // average time between arrivals
+	min_per_cust = MIN_PER_HR / perhour;
 
-	JustTesting *pc3, *pc4;
-	pc3 = new (buffer + sizeof(JustTesting))
-		JustTesting("Better Idea", 6);
-	pc4 = new JustTesting("Heap2", 10);
+	Item temp;            // new customer data
+	long turnaways = 0;   // turned away by full queue
+	long customers = 0;   // joined the queue
+	long served = 0;      // served during the simulation
+	long sum_line = 0;    // cumulative line length
+	int wait_time = 0;    // time until autoteller is free
+	long line_wait = 0;   // cumulative time in line
 
-	cout << "Memory contents:\n";
-	cout << pc3 << ": ";
-	pc3->Show();
-	cout << pc4 << ": ";
-	pc4->Show();
+// running the simulation
+	for (int cycle = 0; cycle < cyclelimit; cycle++)
+	{
+		if (newcustomer(min_per_cust))  // have newcomer
+		{
+			if (line.isfull())
+				turnaways++;
+			else
+			{
+				customers++;
+				temp.set(cycle);     // cycle = time of arrival
+				line.enqueue(temp);  // add newcomer to line
+			}
+		}
+		if (wait_time <= 0 && !line.isempty())
+		{
+			line.dequeue(temp);       // attend next customer
+			wait_time = temp.ptime(); // for wait_time minutes
+			line_wait += cycle - temp.when();
+			served++;
+		}
+		if (wait_time > 0)
+			wait_time--;
+		sum_line += line.queuecount();
+	}
 
-	delete pc2;
-	delete pc4;
-// explicitly destroy placement new objects
-	pc3->~JustTesting();   // destroy object pointed to by pc3
-	pc1->~JustTesting();   // destroy object ointed to by pc1
+	if (customers > 0)
+	{
+		cout << "customers accepted: " << customers << endl;
+		cout << "  customers served: " << served << endl;
+		cout << "         turnaways: " << turnaways << endl;
+		cout << "average queue size: ";
+		cout.precision(2);
+		cout.setf(ios_base::fixed, ios_base::floatfield);
+		cout.setf(ios_base::showpoint);
+		cout << (double)sum_line / cyclelimit << endl;
+		cout << " average wait time: "
+			<< (double)line_wait / served << " minutes\n";
+	}
+	else
+		cout << "No customers!\n";
+	cout << "Done!\n";
 
-	delete[] buffer;
-	cout << "Done\n";
-	
-	cin.get();
 	cin.get();
 	cin.get();
 	return 0;
+}
+
+// x = average time, in minutes, between customers
+// return value is true if customer shows up this minutes
+bool newcustomer(double x)
+{
+	return (rand() * x / RAND_MAX < 1);
 }

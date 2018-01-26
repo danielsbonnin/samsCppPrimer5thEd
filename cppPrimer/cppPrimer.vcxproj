@@ -162,6 +162,7 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="mytime0.h" />
     <ClInclude Include="Plorg.h" />
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="sales.h" />
     <ClInclude Include="Sales1.h" />
     <ClInclude Include="stack.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="List.cpp" />
     <ClCompile Include="mytime0.cpp" />
     <ClCompile Include="Plorg.cpp" />
+    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="sales.cpp" />
     <ClCompile Include="Sales1.cpp" />
     <ClCompile Include="ch11progex.cpp" />
