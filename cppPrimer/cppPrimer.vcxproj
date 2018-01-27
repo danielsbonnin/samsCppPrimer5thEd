@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="Account.h" />
     <ClInclude Include="ch11progex.h" />
+    <ClInclude Include="ch12progex.h" />
     <ClInclude Include="ch3progex.h" />
     <ClInclude Include="ch4progex.h" />
     <ClInclude Include="ch5progex.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="sales.cpp" />
     <ClCompile Include="Sales1.cpp" />
     <ClCompile Include="ch11progex.cpp" />
+    <ClCompile Include="ch12progex.cpp" />
     <ClCompile Include="stack.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

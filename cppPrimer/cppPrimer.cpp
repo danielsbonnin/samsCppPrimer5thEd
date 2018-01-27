@@ -9,6 +9,7 @@
 #include "ch8progex.h"
 #include "ch9progex.h"
 #include "ch11progex.h"
+#include "ch12progex.h"
 #include <iostream>
 #include <cstring>
 #include <cctype>
@@ -23,6 +24,7 @@
 #include "stonewt.h"
 #include "stringGood.h"
 #include "Queue.h"
+
 const int MIN_PER_HR = 60;
 
 bool newcustomer(double x);  // is there a new customer?
