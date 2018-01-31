@@ -167,6 +167,7 @@
     <ClInclude Include="sales.h" />
     <ClInclude Include="Sales1.h" />
     <ClInclude Include="stack.h" />
+    <ClInclude Include="Stack2.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="stocks.h" />
     <ClInclude Include="stonewt.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="ch11progex.cpp" />
     <ClCompile Include="ch12progex.cpp" />
     <ClCompile Include="stack.cpp" />
+    <ClCompile Include="Stack2.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

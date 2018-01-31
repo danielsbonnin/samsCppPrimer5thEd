@@ -12,35 +12,57 @@ int stringGood::num_strings = 0;
 // construct stringGood from C string
 stringGood::stringGood(const char * s)
 {
-	len = std::strlen(s);                     // set size
-	str = new char[len + 1];                  // allot storage
-	std::strcpy(str, s);                      // initialize pointer
-	num_strings++;                            // set object count
+	num_strings++;
+	len = strlen(s);
+	str = new char[len + 1];
+	strcpy(str, s);
 }
 
 stringGood::stringGood()
 {
-	len = 0;
-	str = new char[1];
-	str[0] = '\0';         // default string
 	num_strings++;
+	str = new char[1];
+	str[0] = '\0';
+	len = 0;
 }
 
 // copy constructor
 stringGood::stringGood(const stringGood & st)
 {
-	num_strings++;                  // handle static member update
-	len = st.len;                   // same length
-	str = new char[len + 1];        // allot space
-	std::strcpy(str, st.str);       // copy string to new location
+	num_strings++;
+	len = st.len;
+	str = new char[len + 1];
+	strcpy(str, st.str);
 }
 
 stringGood::~stringGood()             // necessary destructor
 {
-	--num_strings;                    // required
-	delete[] str;                     // required
+	delete[] str;
+	num_strings--;
 }
 
+// string mutate methods
+
+void stringGood::stringlow()
+{
+	for (int i = 0; i < len; ++i)
+		str[i] = tolower(str[i]);
+}
+
+int stringGood::has(char ch) const
+{
+	int count = 0;
+	for (int i = 0; i < len; ++i)
+		if (ch == str[i])
+			count++;
+	return count;
+}
+
+void stringGood::stringup()
+{
+	for (int i = 0; i < len; ++i)
+		str[i] = toupper(str[i]);
+}
 // overloaded operator methods
 
 bool operator<(const stringGood &st1, const stringGood &st2)
@@ -76,25 +98,46 @@ const char & stringGood::operator[](int i) const
 // assign a stringGood to a stringGood
 stringGood & stringGood::operator=(const stringGood & st)
 {
-	if (this == &st)                // object assigned to itself
+	if (this == &st)
 		return *this;
-	delete[] str;                   // free old string
+	delete[] str;
 	len = st.len;
-	str = new char[len + 1];        // get space for new string
-	std::strcpy(str, st.str);       // copy the string
-	return *this;                   // return reference to invoking object
+	str = new char[len + 1];
+	strcpy(str, st.str);
+	return *this;
 }
 
 // assign a C string to a stringGood
 stringGood & stringGood::operator=(const char * s)
 {
 	delete[] str;
-	len = std::strlen(s);
+	len = strlen(s);
 	str = new char[len + 1];
-	std::strcpy(str, s);
+	strcpy(str, s);
 	return *this;
 }
+stringGood stringGood::operator+(const stringGood & st) const
+{
+	stringGood temp;
+	temp.len = len + st.len;
+	temp.str = new char[temp.len + 1];
+	strcpy(temp.str, str);
+	strcpy(temp.str + len, st.str);
+	temp.str[temp.len] = '\0';
+	return temp;
+}
 
+stringGood operator+(const char * st, const stringGood & sg)
+{
+	int newlen = strlen(st) + sg.len;
+	char * newstr = new char[newlen + 1];
+	strcpy(newstr, st);
+	strcpy(newstr + strlen(st), sg.str);
+
+	stringGood temp(newstr);
+	delete[] newstr;
+	return temp;
+}
 std::ostream & operator<<(std::ostream & os, const stringGood & st)
 {
 	os << st.str;
