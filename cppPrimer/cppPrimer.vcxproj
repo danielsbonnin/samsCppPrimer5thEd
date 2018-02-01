@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
+    <ClInclude Include="Brass.h" />
     <ClInclude Include="ch11progex.h" />
     <ClInclude Include="ch12progex.h" />
     <ClInclude Include="ch3progex.h" />
@@ -172,11 +173,13 @@
     <ClInclude Include="stocks.h" />
     <ClInclude Include="stonewt.h" />
     <ClInclude Include="stringGood.h" />
+    <ClInclude Include="tabtenn0.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="vect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
+    <ClCompile Include="Brass.cpp" />
     <ClCompile Include="ch10progex.cpp" />
     <ClCompile Include="ch8progex.cpp" />
     <ClCompile Include="ch9progex.cpp" />
@@ -209,6 +212,7 @@
     <ClCompile Include="stocks.cpp" />
     <ClCompile Include="stonewt.cpp" />
     <ClCompile Include="stringGood.cpp" />
+    <ClCompile Include="tabtenn0.cpp" />
     <ClCompile Include="vect.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
