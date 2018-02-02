@@ -1,23 +1,39 @@
 #pragma once
-class Brass
+
+// Abstract Base Class
+class AcctABC
 {
 private:
 	enum { MAX = 35 };
 	char fullName[MAX];
 	long acctNum;
 	double balance;
+protected:
+	const char * FullName() const { return fullName; }
+	long AcctNum() const { return acctNum; }
+	std::ios_base::fmtflags SetFormat() const;
 public:
-	Brass();
-	Brass(const char * s = "Nullbody", long an = -1, double bal = 0.0);
+	AcctABC(const char *s = "Nullbody", long an = -1,
+		double bal = 0.0);
 	void Deposit(double amt);
+	virtual void Withdraw(double amt) = 0;  // pure virtual function
+	double Balance() const { return balance; };
+	virtual void ViewAcct() const = 0;      // pure virtual function
+	virtual ~AcctABC() {}
+};
+
+class Brass : public AcctABC
+{
+public:
+	Brass(const char *s = "Nullbody", long an = -1,
+		double bal = 0.0) : AcctABC(s, an, bal) {}
 	virtual void Withdraw(double amt);
-	double Balance() const;
 	virtual void ViewAcct() const;
-	virtual ~Brass() {};
+	virtual ~Brass() {}
 };
 
 //Brass Plus Account Class
-class BrassPlus : public Brass
+class BrassPlus : public AcctABC
 {
 private:
 	double maxLoan;

@@ -3,9 +3,9 @@
 #include <cstring>
 #include "Brass.h"
 using namespace std;
-// Brass methods
 
-Brass::Brass(const char *s, long an, double bal)
+// Abstract Base Class
+AcctABC::AcctABC(const char * s, long an, double bal)
 {
 	strncpy(fullName, s, MAX - 1);
 	fullName[MAX - 1] = '\0';
@@ -13,7 +13,7 @@ Brass::Brass(const char *s, long an, double bal)
 	balance = bal;
 }
 
-void Brass::Deposit(double amt)
+void AcctABC::Deposit(double amt)
 {
 	if (amt < 0)
 		cout << "Negative deposit not allowed; "
@@ -22,14 +22,30 @@ void Brass::Deposit(double amt)
 		balance += amt;
 }
 
+void AcctABC::Withdraw(double amt)
+{
+	balance -= amt;
+}
+
+// protected method
+ios_base::fmtflags AcctABC::SetFormat() const
+{
+// set up ###.## format
+	ios_base::fmtflags initialState =
+		cout.setf(ios_base::fixed, ios_base::floatfield);
+	cout.setf(ios_base::showpoint);
+	cout.precision(2);
+	return initialState;
+}
+
+// Brass methods
 void Brass::Withdraw(double amt)
 {
 	if (amt < 0)
 		cout << "Withdrawal amount must be positive; "
-
 		<< "withdrawal canceled.\n";
-	else if (amt <= balance)
-		balance -= amt;
+	else if (amt <= Balance())
+		AcctABC::Withdraw(amt);
 	else
 	{
 		cout << "Withdrawal amount of $" << amt
@@ -37,27 +53,20 @@ void Brass::Withdraw(double amt)
 			<< "Withdrawal canceled.\n";
 	}
 }
-double Brass::Balance() const
-{
-	return balance;
-}
 
 void Brass::ViewAcct() const
 {
 	// set up ###.## format
-	ios_base::fmtflags initialState =
-		cout.setf(ios_base::fixed, ios_base::floatfield);
-	cout.setf(ios_base::showpoint);
-	cout.precision(2);
-	cout << "Client: " << fullName << endl;
-	cout << "Account Number: " << acctNum << endl;
-	cout << "Balance: $" << balance << endl;
+	ios_base::fmtflags initialState = SetFormat();
+	cout << "Client: " << FullName() << endl;
+	cout << "Account Number: " << AcctNum() << endl;
+	cout << "Balance: $" << Balance() << endl;
 	cout.setf(initialState); // restore original format
 }
 
 // BrassPlus methods
 BrassPlus::BrassPlus(const char *s, long an, double bal,
-	double ml, double r) : Brass(s, an, bal)
+	double ml, double r) : AcctABC(s, an, bal)
 {
 	maxLoan = ml;
 	owesBank = 0.0;
@@ -65,7 +74,7 @@ BrassPlus::BrassPlus(const char *s, long an, double bal,
 }
 
 BrassPlus::BrassPlus(const Brass & ba, double ml, double r)
-	: Brass(ba)    // uses implicit copy constructor
+	: AcctABC(ba)    // uses implicit copy constructor
 {
 	maxLoan = ml;
 	owesBank = 0.0;
@@ -76,12 +85,9 @@ BrassPlus::BrassPlus(const Brass & ba, double ml, double r)
 void BrassPlus::ViewAcct() const
 {
 	// set up ###.## format
-	ios_base::fmtflags initialState =
-		cout.setf(ios_base::fixed, ios_base::floatfield);
-	cout.setf(ios_base::showpoint);
-	cout.precision(2);
-
-	Brass::ViewAcct();    // display base portion
+	ios_base::fmtflags initialState = SetFormat();
+	cout << "BrassPlus Client: " << FullName() << endl;
+	cout << "Balance: $" << Balance() << endl;
 	cout << "Maximum loan: $" << maxLoan << endl;
 	cout << "Owed to bank: $" << owesBank << endl;
 	cout << "Loan Rate: " << 100 * rate << "%\n";
@@ -92,11 +98,7 @@ void BrassPlus::ViewAcct() const
 void BrassPlus::Withdraw(double amt)
 {
 	// set up ###.## format
-	ios_base::fmtflags initialState =
-		cout.setf(ios_base::fixed, ios_base::floatfield);
-	cout.setf(ios_base::showpoint);
-	cout.precision(2);
-
+	ios_base::fmtflags initialState = SetFormat();
 	double bal = Balance();
 	if (amt <= bal)
 		Brass:Withdraw(amt);
@@ -107,14 +109,10 @@ void BrassPlus::Withdraw(double amt)
 		cout << "Bank advance: $" << advance << endl;
 		cout << "Finance charge: $" << advance * rate << endl;
 		Deposit(advance);
-		Brass::Withdraw(amt);
+		AcctABC::Withdraw(amt);
 	}
 	else
 		cout << "Credit limit exceeded. Transaction cancelled.\n";
 	cout.setf(initialState);
 }
 
-
-Brass::~Brass()
-{
-}

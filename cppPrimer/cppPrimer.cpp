@@ -23,30 +23,59 @@
 #include "vect.h"
 #include "stonewt.h"
 #include "tabtenn0.h"
-
+#include "Brass.h"
 using namespace std;
-
+const int CLIENTS = 4;
+const int LEN = 40;
 int main(void)
 {
-	TableTennisPlayer player1("Tara", "Boomdea", false);
-	RatedPlayer rplayer1(1140, "Mallory", "Duck", true);
-	rplayer1.Name();          // derived object uses base method
-	if (rplayer1.HasTable())
-		cout << ": has a table.\n";
-	else
-		cout << ": hasn't a table.\n";
-	player1.Name();           // base object uses base method
-	if (player1.HasTable())
-		cout << ": has a table";
-	else
-		cout << ": hasn't a table.\n";
-	cout << "Name: ";
-	rplayer1.Name();
-	cout << "; Rating: " << rplayer1.Rating() << endl;
-	RatedPlayer rplayer2(1212, player1);
-	cout << "Name: ";
-	rplayer2.Name();
-	cout << "; Rating: " << rplayer2.Rating() << endl;
+	AcctABC * p_clients[CLIENTS];
+
+	int i;
+	for (i = 0; i < CLIENTS; i++)
+	{
+		char temp[LEN];
+		long tempnum;
+		double tempbal;
+		char kind;
+		cout << "Enter client's name: ";
+		cin.getline(temp, LEN);
+		cout << "Enter client's account number: ";
+		cin >> tempnum;
+		cout << "Enter opening balance: $";
+		cin >> tempbal;
+		cout << "Enter 1 for Brass Account or "
+			<< "2 for BrassPlus Account: ";
+		while (cin >> kind && (kind != '1' && kind != '2'))
+			cout << "Enter either 1 or 2: ";
+		if (kind == '1')
+			p_clients[i] = new Brass(temp, tempnum, tempbal);
+		else
+		{
+			double tmax, trate;
+			cout << "Enter the overdraft limit: $";
+			cin >> tmax;
+			cout << "Enter the interest rate "
+				<< "as a decimal fraction: ";
+			cin >> trate;
+			p_clients[i] = new BrassPlus(temp, tempnum, tempbal,
+				tmax, trate);
+		}
+		while (cin.get() != '\n')
+			continue;
+	}
+	cout << endl;
+	for (i = 0; i < CLIENTS; i++)
+	{
+		p_clients[i]->ViewAcct();
+		cout << endl;
+	}
+
+	for (i = 0; i < CLIENTS; i++)
+	{
+		delete p_clients[i];  // free memory
+	}
+	cout << "Done.\n";
 	cin.get();
 	cin.get();
 	return 0;
