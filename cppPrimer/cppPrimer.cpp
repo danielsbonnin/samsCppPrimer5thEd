@@ -24,58 +24,22 @@
 #include "stonewt.h"
 #include "tabtenn0.h"
 #include "Brass.h"
+#include "dma.h"
 using namespace std;
-const int CLIENTS = 4;
-const int LEN = 40;
+
 int main(void)
 {
-	AcctABC * p_clients[CLIENTS];
-
-	int i;
-	for (i = 0; i < CLIENTS; i++)
-	{
-		char temp[LEN];
-		long tempnum;
-		double tempbal;
-		char kind;
-		cout << "Enter client's name: ";
-		cin.getline(temp, LEN);
-		cout << "Enter client's account number: ";
-		cin >> tempnum;
-		cout << "Enter opening balance: $";
-		cin >> tempbal;
-		cout << "Enter 1 for Brass Account or "
-			<< "2 for BrassPlus Account: ";
-		while (cin >> kind && (kind != '1' && kind != '2'))
-			cout << "Enter either 1 or 2: ";
-		if (kind == '1')
-			p_clients[i] = new Brass(temp, tempnum, tempbal);
-		else
-		{
-			double tmax, trate;
-			cout << "Enter the overdraft limit: $";
-			cin >> tmax;
-			cout << "Enter the interest rate "
-				<< "as a decimal fraction: ";
-			cin >> trate;
-			p_clients[i] = new BrassPlus(temp, tempnum, tempbal,
-				tmax, trate);
-		}
-		while (cin.get() != '\n')
-			continue;
-	}
-	cout << endl;
-	for (i = 0; i < CLIENTS; i++)
-	{
-		p_clients[i]->ViewAcct();
-		cout << endl;
-	}
-
-	for (i = 0; i < CLIENTS; i++)
-	{
-		delete p_clients[i];  // free memory
-	}
-	cout << "Done.\n";
+	baseDMA shirt("Portabelly", 8);
+	lacksDMA balloon("red", "Blimpo", 4);
+	hasDMA map("Mercator", "Buffalo Keys", 5);
+	cout << shirt << endl;
+	cout << balloon << endl;
+	cout << map << endl;
+	lacksDMA balloon2(balloon);
+	hasDMA map2;
+	map2 = map;
+	cout << balloon2 << endl;
+	cout << map2 << endl;
 	cin.get();
 	cin.get();
 	return 0;

@@ -157,6 +157,7 @@
     <ClInclude Include="ch8progex.h" />
     <ClInclude Include="ch9progex.h" />
     <ClInclude Include="complex0.h" />
+    <ClInclude Include="dma.h" />
     <ClInclude Include="golf.h" />
     <ClInclude Include="golf2.h" />
     <ClInclude Include="ch10progex.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="ch5progex.cpp" />
     <ClCompile Include="ch6progex.cpp" />
     <ClCompile Include="ch7progex.cpp" />
+    <ClCompile Include="dma.cpp" />
     <ClCompile Include="golf.cpp" />
     <ClCompile Include="golf2.cpp" />
     <ClCompile Include="Golf3.cpp" />
