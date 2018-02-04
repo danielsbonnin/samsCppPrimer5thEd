@@ -10,6 +10,7 @@
 #include "ch9progex.h"
 #include "ch11progex.h"
 #include "ch12progex.h"
+#include "ch13progex.h"
 #include <iostream>
 #include <cstring>
 #include <cctype>
@@ -29,17 +30,7 @@ using namespace std;
 
 int main(void)
 {
-	baseDMA shirt("Portabelly", 8);
-	lacksDMA balloon("red", "Blimpo", 4);
-	hasDMA map("Mercator", "Buffalo Keys", 5);
-	cout << shirt << endl;
-	cout << balloon << endl;
-	cout << map << endl;
-	lacksDMA balloon2(balloon);
-	hasDMA map2;
-	map2 = map;
-	cout << balloon2 << endl;
-	cout << map2 << endl;
+	ex13_1();
 	cin.get();
 	cin.get();
 	return 0;

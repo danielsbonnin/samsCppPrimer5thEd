@@ -162,6 +162,7 @@
     <ClInclude Include="golf2.h" />
     <ClInclude Include="ch10progex.h" />
     <ClInclude Include="Golf3.h" />
+    <ClInclude Include="ch13progex.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="mytime0.h" />
     <ClInclude Include="Plorg.h" />
@@ -182,6 +183,7 @@
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="Brass.cpp" />
     <ClCompile Include="ch10progex.cpp" />
+    <ClCompile Include="ch13progex.cpp" />
     <ClCompile Include="ch8progex.cpp" />
     <ClCompile Include="ch9progex.cpp" />
     <ClCompile Include="complex0.cpp" />
