@@ -109,10 +109,12 @@ public:
 // base class
 class Cd {  // represents a CD disk
 private:
-	char performers[50];
-	char label[20];
+	char * performers;
+	char * label;
 	int selections;     // number of selections
 	double playtime;    // playing time in minutes
+protected:
+	enum {LEN = 50};
 public:
 	Cd(const char * s1, const char * s2, int n, double x);
 	Cd(const Cd & d);
@@ -125,8 +127,7 @@ public:
 class Classic : public Cd
 {
 private:
-	enum { LEN = 50 };
-	char primaryWork[LEN];
+	char * primaryWork;
 public:
 	Classic();
 	Classic(const char * pw, const char * perf, const char * lab, int sel = 0, double pt = 0.0);
