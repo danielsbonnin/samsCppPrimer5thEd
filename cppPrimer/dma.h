@@ -12,6 +12,7 @@ public:
 	baseDMA(const char * l = "null", int r = 0);
 	baseDMA(const baseDMA & rs);
 	virtual ~baseDMA();
+	virtual void View() const = 0;
 	baseDMA & operator=(const baseDMA & rs);
 	friend std::ostream & operator<<(std::ostream & os,
 		const baseDMA & rs);
@@ -30,6 +31,7 @@ public:
 	lacksDMA(const char * c = "blank", const char * l = "null",
 		int r = 0);
 	lacksDMA(const char * c, const baseDMA & rs);
+	void View() const;
 	friend std::ostream & operator<<(std::ostream & os,
 		const lacksDMA & rs);
 };
@@ -44,6 +46,7 @@ public:
 		int r = 0);
 	hasDMA(const char * s, const baseDMA & rs);
 	hasDMA(const hasDMA & hs);
+	void View() const;
 	~hasDMA();
 	hasDMA & operator=(const hasDMA & rs);
 	friend std::ostream & operator<<(std::ostream & os,

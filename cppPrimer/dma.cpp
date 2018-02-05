@@ -2,6 +2,7 @@
 #include "dma.h"
 #include <cstring>
 
+using namespace std;
 // baseDMA methods
 baseDMA::baseDMA(const char * l, int r)
 {
@@ -48,6 +49,11 @@ lacksDMA::lacksDMA(const char * c, const char * l, int r)
 	color[39] = '\0';
 }
 
+void lacksDMA::View() const
+{
+	cout << *this << endl;
+}
+
 lacksDMA::lacksDMA(const char * c, const baseDMA & rs)
 	: baseDMA(rs)
 {
@@ -68,6 +74,7 @@ hasDMA::hasDMA(const char * s, const char * l, int r)
 {
 	style = new char[std::strlen(s) + 1];
 	std::strcpy(style, s);
+	style[strlen(s)] = '\0';
 }
 
 hasDMA::hasDMA(const char * s, const baseDMA & rs)
@@ -94,11 +101,16 @@ hasDMA & hasDMA::operator=(const hasDMA & hs)
 	if (this == &hs)
 		return *this;
 	baseDMA::operator=(hs);  // copy base portion
+	delete[] style;
 	style = new char[std::strlen(hs.style) + 1];
 	std::strcpy(style, hs.style);
 	return *this;
 }
 
+void hasDMA::View() const
+{
+	cout << *this << endl;
+}
 std::ostream  & operator<<(std::ostream & os, const hasDMA & hs)
 {
 	os << (const baseDMA &)hs;

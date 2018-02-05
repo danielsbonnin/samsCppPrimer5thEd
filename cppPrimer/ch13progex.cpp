@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ch13progex.h"
+#include "dma.h"
 #include <iostream>
 using namespace std;
 Cd::Cd(const char * s1, const char * s2, int n, double x)
@@ -150,11 +151,134 @@ void ex13_2()
 	*/
 	ex13_1();
 }
+
+const int numDmas = 4;
+const int LAB_LEN = 40;
 void ex13_3()
 {
+	baseDMA * dmas[numDmas];
 
+	int i;
+	for (i = 0; i < numDmas; i++)
+	{
+		char temp[LAB_LEN + 1];
+		int tempnum;
+		char color_or_style[LAB_LEN + 1];
+		char kind;
+		cout << "Enter label: ";
+		cin.getline(temp, LAB_LEN);
+		cout << "Enter a rating: ";
+		cin >> tempnum;
+		cout << "Enter 1 for lacksDMA or "
+			<< "2 for hasDMA: ";
+		while (cin >> kind && (kind != '1' && kind != '2'))
+			cout << "Enter either 1 or 2: ";
+		while (cin.get() != '\n')
+			continue;
+		if (kind == '1')
+		{
+			cout << "You have chosen to enter a lacksDMA object\n";
+			cout << "Enter a color: ";
+			cin.getline(color_or_style, LAB_LEN);
+			dmas[i] = new lacksDMA(color_or_style, temp, tempnum);
+		}
+		else
+		{
+			cout << "You have chosen to enter a hasDMA object\n";
+			cout << "Enter a style: ";
+			cin.getline(color_or_style, LAB_LEN);
+			dmas[i] = new hasDMA(color_or_style, temp, tempnum);
+		}
+	}
+	cout << endl;
+	for (i = 0; i < numDmas; i++)
+	{
+		dmas[i]->View();
+	}
+	for (i = 0; i < numDmas; i++)
+	{
+		delete dmas[i];   // free memory
+	}
+	cout << "Done.\n";
+}
+
+Port::Port(const char * br, const char * st, int b)
+{
+	brand = new char[strlen(br) + 1];
+	strcpy(brand, br);
+	strncpy(style, st, 19);
+	style[19] = '\0';
+	bottles = b;
+}
+
+Port::Port(const Port & p)
+{
+	brand = new char[strlen(p.brand) + 1];
+	strcpy(brand, p.brand);
+	strncpy(style, p.style, 20);
+	bottles = p.bottles;
+}
+
+Port & Port::operator=(const Port & p)
+{
+	if (&p == this)
+		return *this;
+	brand = new char[strlen(p.brand) + 1];
+	strncpy(style, p.style, 20);
+	bottles = p.bottles;
+	return *this;
+}
+
+Port & Port::operator+=(int b)
+{
+	bottles += b;
+}
+
+Port & Port::operator-=(int b)
+{
+	bottles -= b;
+}
+
+void Port::Show() const
+{
+	cout << "Brand: " << brand << endl;
+	cout << "Kind: " << style << endl;
+	cout << "Bottles: " << bottles << endl;
+}
+
+std::ostream & operator<<(std::ostream & os, const Port & p)
+{
+	os << p.brand << ", " << p.style << ", " << p.bottles;
+	return os;
 }
 void ex13_4()
 {
+	// a. Port definitions above
+	// b. The destructor is redefined to handle new dma
+	// the new data member: year requires updated constructors,
+	//		assignment operator, and << operator
+	// c. operator=() is not virtual because its function signature
+	// will never conflict with that of it's ancestors. There is not 
+	// point. operator<<() is not virtual because it is not a class member.
+	// d. see above
+}
 
+VintagePort::VintagePort() : Port()
+{
+	nickname = new char[5];
+	strcpy(nickname, "none");
+	year = -1;
+}
+
+VintagePort::VintagePort(const char * br, int b, const char * nn, int y) : Port(br, "vintage", b), year(y)
+{
+	nickname = new char[strlen(nn) + 1];
+	strcpy(nickname, nn);
+}
+
+VintagePort::VintagePort(const VintagePort & vp): Port(vp)
+{
+	nickname = new char[strlen(vp.nickname) + 1];
+	strcpy(nickname, vp.nickname);
+	year = vp.year;
 }

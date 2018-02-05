@@ -30,7 +30,7 @@ using namespace std;
 
 int main(void)
 {
-	ex13_2();
+	ex13_3();
 	cin.get();
 	cin.get();
 	return 0;
