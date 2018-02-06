@@ -169,7 +169,7 @@ public:
 	~VintagePort() { delete[] nickname; }
 	VintagePort & operator=(const VintagePort & vp);
 	void Show() const;
-	friend ostream & operator<<(ostream & os, const VintagePort & vp);
+	friend std::ostream & operator<<(std::ostream & os, const VintagePort & vp);
 };
 void ex13_1();
 void ex13_2();

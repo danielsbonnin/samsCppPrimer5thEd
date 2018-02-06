@@ -3,7 +3,6 @@
 #include "dma.h"
 #include <iostream>
 using namespace std;
-
 Cd::Cd(const char * s1, const char * s2, int n, double x)
 {
 	performers = new char[strlen(s1) + 1];
@@ -15,7 +14,6 @@ Cd::Cd(const char * s1, const char * s2, int n, double x)
 	selections = n;
 	playtime = x;
 }
-
 Cd::Cd(const Cd & d)
 {
 	performers = new char[strlen(d.performers) + 1];
@@ -27,7 +25,6 @@ Cd::Cd(const Cd & d)
 	selections = d.selections;
 	playtime = d.playtime;
 }
-
 Cd::Cd()
 {
 	performers = new char[LEN];
@@ -39,7 +36,6 @@ Cd::Cd()
 	selections = 0;
 	playtime = 0.0;
 }
-
 Cd::~Cd()
 {
 	delete[] performers;
@@ -76,14 +72,12 @@ Classic::Classic() : Cd()
 	strncpy(primaryWork, "None", LEN - 1);
 	primaryWork[LEN - 1] = '\0';
 }
-
 Classic::Classic(const Classic & c) : Cd(c)
 {
 	primaryWork = new char[strlen(c.primaryWork) + 1];
 	strcpy(primaryWork, c.primaryWork);
 	primaryWork[strlen(c.primaryWork)] = '\0';
 }
-
 Classic::Classic(const char * pw, const char * perf, const char * lab, int sel, double pt)
 	: Cd(perf, lab, sel, pt)
 {
@@ -140,6 +134,7 @@ void ex13_1()
 	Classic copy;
 	copy = c2;
 	copy.Report();
+	
 }
 
 void Bravo(const Cd & disk)
