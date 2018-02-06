@@ -175,6 +175,7 @@
     <ClInclude Include="stocks.h" />
     <ClInclude Include="stonewt.h" />
     <ClInclude Include="stringGood.h" />
+    <ClInclude Include="studentc.h" />
     <ClInclude Include="tabtenn0.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="vect.h" />
@@ -205,6 +206,7 @@
     <ClCompile Include="Sales1.cpp" />
     <ClCompile Include="ch11progex.cpp" />
     <ClCompile Include="ch12progex.cpp" />
+    <ClCompile Include="studentc.cpp" />
     <ClCompile Include="stack.cpp" />
     <ClCompile Include="Stack2.cpp" />
     <ClCompile Include="stdafx.cpp">
