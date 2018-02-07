@@ -1,39 +1,38 @@
 #pragma once
-// studentc.h -- defining a Student class using containment
-
+// studentc.h -- defining a Student class using private inheritance
 #include <iostream>
 #include <string>
 #include <valarray>
-class Student
+class Student : private std::string, private std::valarray<double>
 {
 private:
 	typedef std::valarray<double> ArrayDb;
-	std::string name;      // contained object
-	ArrayDb scores;        // contained object
 	// private method for scores output
 	std::ostream & arr_out(std::ostream & os) const;
 public:
-	Student() : name("Null Student"), scores() {}
+	using std::valarray<double>::min;
+	using std::valarray<double>::max;
+	Student() : std::string("Null Student"), ArrayDb() {}
 	Student(const std::string & s)
-		: name(s), scores() {}
-	explicit Student(int n) : name("Nully"), scores(n) {}
+		: std::string(s), ArrayDb() {}
+	Student(int n) : std::string("Nully"), ArrayDb(n) {}
 	Student(const std::string & s, int n)
-		: name(s), scores(n) {}
+		: std::string(s), ArrayDb(n) {}
 	Student(const std::string & s, const ArrayDb & a)
-		: name(s), scores(a) {}
+		: std::string(s), ArrayDb(a) {}
 	Student(const char * str, const double * pd, int n)
-		: name(str), scores(pd, n) {}
+		: std::string(str), ArrayDb(pd, n) {}
 	~Student() {}
 	double Average() const;
-	const std::string & Name() const;
 	double & operator[](int i);
 	double operator[](int i) const;
+	const std::string & Name() const;
 // friends
 	// input
 	friend std::istream & operator>>(std::istream & is,
-		Student & stu);                                  // 1 word
+		Student & stu);  // 1 word
 	friend std::istream & getline(std::istream & is,
-		Student & stu);                                  // 1 line
+		Student & stu); // 1 line
 	// output
 	friend std::ostream & operator<<(std::ostream & os,
 		const Student & stu);

@@ -120,6 +120,9 @@
     <ClInclude Include="studentc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="worker0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -222,6 +225,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="studentc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="worker0.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
