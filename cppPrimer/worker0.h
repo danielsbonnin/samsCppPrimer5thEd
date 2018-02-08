@@ -1,4 +1,4 @@
-// worker0.h  -- working classes
+// worker0.h  -- working classes with multiple inheritance
 #pragma once
 
 #include <string>
@@ -8,19 +8,25 @@ class Worker    // an abstract base class
 private:
 	std::string fullname;
 	long id;
+protected:
+	virtual void Data() const;
+	virtual void Get();
 public:
 	Worker() : fullname("no one"), id(0L) {}
 	Worker(const std::string & s, long n)
 		: fullname(s), id(n) {}
 	virtual ~Worker() = 0;    // pure virtual destructor
-	virtual void Set();
-	virtual void Show() const;
+	virtual void Set() = 0;
+	virtual void Show() const = 0;
 };
 
-class Waiter : public Worker
+class Waiter : virtual public Worker
 {
 private:
 	int panache;
+protected:
+	void Data() const;
+	void Get();
 public:
 	Waiter() : Worker(), panache(0) {}
 	Waiter(const std::string & s, long n, int p = 0)
@@ -31,7 +37,7 @@ public:
 	void Show() const;
 };
 
-class Singer : public Worker
+class Singer : virtual public Worker
 {
 protected:
 	enum {
@@ -39,6 +45,8 @@ protected:
 		bass, baritone, tenor
 	};
 	enum { Vtypes = 7 };
+	void Data() const;
+	void Get();
 private:
 	static char *pv[Vtypes];     // string equivs of voice types
 	int voice;
@@ -48,6 +56,27 @@ public:
 		: Worker(s, n), voice(v) {}
 	Singer(const Worker & wk, int v = other)
 		: Worker(wk), voice(v) {}
+	void Set();
+	void Show() const;
+};
+
+// multiple inheritance
+class SingingWaiter : public Singer, public Waiter
+{
+protected:
+	void Data() const;
+	void Get();
+public:
+	SingingWaiter() {}
+	SingingWaiter(const std::string & s, long n, int p = 0,
+		int v = other)
+		: Worker(s, n), Waiter(s, n, p), Singer(s, n, v) {}
+	SingingWaiter(const Worker & wk, int p = 0, int v = other)
+		: Worker(wk), Waiter(wk, p), Singer(wk, v) {}
+	SingingWaiter(const Waiter & wt, int v = other)
+		: Worker(wt), Waiter(wt), Singer(wt, v) {}
+	SingingWaiter(const Singer & wt, int p = 0)
+		: Worker(wt), Waiter(wt, p), Singer(wt) {}
 	void Set();
 	void Show() const;
 };
