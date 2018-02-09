@@ -129,6 +129,9 @@
     <ClInclude Include="arraytp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="apair.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

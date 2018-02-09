@@ -30,40 +30,29 @@
 #include "worker0.h"
 #include "stacktp.h"
 #include "arraytp.h"
+#include "apair.h"
 using namespace std;
 
 int main(void)
 {
-	ArrayTP<int, 10> sums;
-	ArrayTP<double, 10> aves;
-	ArrayTP< ArrayTP<int, 5>, 10> twodee;
-
-
-	int i, j;
-
-	for (i = 0; i < 10; i++)
+	APair<string, int> ratings[4] =
 	{
-		sums[i] = 0;
-		for (j = 0; j < 5; j++)
-		{
-			twodee[i][j] = (i + 1) * (j + 1);
-			sums[i] += twodee[i][j];
-		}
-		aves[i] = (double)sums[i] / 10;
-	}
-	for (i = 0; i < 10; i++)
-	{
-		for (j = 0; j < 5; j++)
-		{
-			cout.width(2);
-			cout << twodee[i][j] << ' ';
-		}
-		cout << ": sum = ";
-		cout.width(3);
-		cout << sums[i] << ", average = " << aves[i] << endl;
-	}
+		APair<string, int>("The Purple Duke", 5),
+		APair<string, int>("Jake's Frisco Al Fresco", 4),
+		APair<string, int>("Mont Souffle", 5),
+		APair<string, int>("Gertie's Eats", 3)
+	};
 
-	cout << "Done.\n";
+	int joints = sizeof(ratings) / sizeof(APair<string, int>);
+	cout << "Rating:\t Eatery\n";
+	for (int i = 0; i < joints; i++)
+		cout << ratings[i].second() << ":\t "
+		<< ratings[i].first() << endl;
+	cout << "Oops! Revised rating:\n";
+	ratings[3].first() = "Gertie's Fab Eats";
+	ratings[3].second() = 6;
+	cout << ratings[3].second() << ":\t "
+		<< ratings[3].first() << endl;
 	cin.get();
 	cin.get();
 	return 0;
