@@ -3,39 +3,41 @@ template <typename Type>
 class Stack
 {
 private:
-	enum { MAX = 10 };    // constant specific to class
-	Type items[MAX];      // holds stack items
+	enum { SIZE = 10 };    // default size
+	int stacksize;
+	Type * items;         // holds stack items
 	int top;              // index for top stack item
 public:
-	Stack();
-	bool isempty();
-	bool isfull();
-	bool push(const Type & item); // add item to stack
-	bool pop(Type & item);        // pop top into item
+	explicit Stack(int ss = SIZE);
+	Stack(const Stack & st);
+	~Stack() { delete[] items; }
+	bool isempty() { return top == 0; }
+	bool isfull() { return top == stacksize; }
+	bool push(const Type & item);   // add item to stack
+	bool pop(Type & item);          // pop top into item
+	Stack & operator=(const Stack & st);
 };
 
 template <typename Type>
-Stack<Type>::Stack()
+Stack<Type>::Stack(int ss) : stacksize(ss), top(0)
 {
-	top = 0;
+	items = new Type[stacksize];
 }
 
 template <typename Type>
-bool Stack<Type>::isempty()
+Stack<Type>::Stack(const Stack & st)
 {
-	return top == 0;
-}
-
-template <typename Type>
-bool Stack<Type>::isfull()
-{
-	return top == MAX;
+	stacksize = st.stacksize;
+	top = st.top;
+	items = new Type[stacksize];
+	for (int i = 0; i < top; i++)
+		items[i] = st.items[i];
 }
 
 template <typename Type>
 bool Stack<Type>::push(const Type & item)
 {
-	if (top < MAX)
+	if (top < stacksize)
 	{
 		items[top++] = item;
 		return true;
@@ -54,4 +56,18 @@ bool Stack<Type>::pop(Type & item)
 	}
 	else
 		return false;
+}
+
+template <typename Type>
+Stack<Type> & Stack<Type>::operator=(const Stack<Type> & st)
+{
+	if (this == &st)
+		return *this;
+	delete[] items;
+	stacksize = st.stacksize;
+	top = st.top;
+	items = new Type[stacksize];
+	for (int i = 0; i < top; i++)
+		items[i] = st.items[i];
+	return *this;
 }

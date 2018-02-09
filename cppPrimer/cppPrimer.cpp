@@ -30,45 +30,41 @@
 #include "worker0.h"
 #include "stacktp.h"
 using namespace std;
-
+const int Num = 10;
 int main(void)
 {
-	Stack<string> st;   // create an empty stack
-	char ch;
-	string po;
-	cout << "Please enter A to add a purchase order,\n"
-		<< "P to process a PO, or Q to quit.\n";
-	while (cin >> ch && toupper(ch) != 'Q')
+	cout << "Please enter stack size: ";
+	int stacksize;
+	cin >> stacksize;
+// create an empty stack with stacksize slots
+	Stack<const char *> st(stacksize);
+
+// in basket
+	const char * in[Num] = {
+		" 1: Hank Gilgamesh", " 2: Kiki Ishtar",
+		" 3: Betty Rocker", " 4: Ian Flagranti",
+		" 5: Wolfgang Kibble", " 6: Portia Koop",
+		" 7: Joy Almondo", " 8: Xaverie Paprika",
+		" 9: Juan Moore", "10: Misha Mache"
+	};
+// out basket
+	const char * out[Num];
+	int processed = 0;
+	int nextin = 0;
+	while (processed < Num)
 	{
-		while (cin.get() != '\n')
-			continue;
-		if (!isalpha(ch))
-		{
-			cout << '\a';
-			continue;
-		}
-		switch (ch)
-		{
-		case 'A':
-		case 'a': cout << "Enter a PO number to add: ";
-			cin >> po;
-			if (st.isfull())
-				cout << "stack already full\n";
-			else
-				st.push(po);
-			break;
-		case 'P':
-		case 'p': if (st.isempty())
-			cout << "stack already empty\n";
-				  else {
-					  st.pop(po);
-					  cout << "PO #" << po << " popped\n";
-					  break;
-				  }
-		}
-		cout << "Please enter A to add a purchase order,\n"
-			<< "P to process a PO, or Q to quit.\n";
+		if (st.isempty())
+			st.push(in[nextin++]);
+		else if (st.isfull())
+			st.pop(out[processed++]);
+		else if (rand() % 2 && nextin < Num)    // 50-50 chance
+			st.push(in[nextin++]);
+		else
+			st.pop(out[processed++]);
 	}
+	for (int i = 0; i < Num; i++)
+		cout << out[i] << endl;
+
 	cout << "Bye\n";
 	cin.get();
 	cin.get();
