@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
+    <ClInclude Include="arraytp.h" />
     <ClInclude Include="Brass.h" />
     <ClInclude Include="ch11progex.h" />
     <ClInclude Include="ch12progex.h" />

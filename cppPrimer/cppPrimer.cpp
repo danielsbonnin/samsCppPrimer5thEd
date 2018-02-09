@@ -29,43 +29,41 @@
 #include "dma.h"
 #include "worker0.h"
 #include "stacktp.h"
+#include "arraytp.h"
 using namespace std;
-const int Num = 10;
+
 int main(void)
 {
-	cout << "Please enter stack size: ";
-	int stacksize;
-	cin >> stacksize;
-// create an empty stack with stacksize slots
-	Stack<const char *> st(stacksize);
+	ArrayTP<int, 10> sums;
+	ArrayTP<double, 10> aves;
+	ArrayTP< ArrayTP<int, 5>, 10> twodee;
 
-// in basket
-	const char * in[Num] = {
-		" 1: Hank Gilgamesh", " 2: Kiki Ishtar",
-		" 3: Betty Rocker", " 4: Ian Flagranti",
-		" 5: Wolfgang Kibble", " 6: Portia Koop",
-		" 7: Joy Almondo", " 8: Xaverie Paprika",
-		" 9: Juan Moore", "10: Misha Mache"
-	};
-// out basket
-	const char * out[Num];
-	int processed = 0;
-	int nextin = 0;
-	while (processed < Num)
+
+	int i, j;
+
+	for (i = 0; i < 10; i++)
 	{
-		if (st.isempty())
-			st.push(in[nextin++]);
-		else if (st.isfull())
-			st.pop(out[processed++]);
-		else if (rand() % 2 && nextin < Num)    // 50-50 chance
-			st.push(in[nextin++]);
-		else
-			st.pop(out[processed++]);
+		sums[i] = 0;
+		for (j = 0; j < 5; j++)
+		{
+			twodee[i][j] = (i + 1) * (j + 1);
+			sums[i] += twodee[i][j];
+		}
+		aves[i] = (double)sums[i] / 10;
 	}
-	for (int i = 0; i < Num; i++)
-		cout << out[i] << endl;
+	for (i = 0; i < 10; i++)
+	{
+		for (j = 0; j < 5; j++)
+		{
+			cout.width(2);
+			cout << twodee[i][j] << ' ';
+		}
+		cout << ": sum = ";
+		cout.width(3);
+		cout << sums[i] << ", average = " << aves[i] << endl;
+	}
 
-	cout << "Bye\n";
+	cout << "Done.\n";
 	cin.get();
 	cin.get();
 	return 0;
