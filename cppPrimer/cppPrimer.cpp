@@ -34,36 +34,54 @@
 #include "tempmemb.h"
 using namespace std;
 
-template <template <typename T> class Thing>
-class Crab
+// template prototypes
+template <typename T> void counts();
+template <typename T> void report(T &);
+
+// template class
+template <typename TT>
+class HasFriendT
 {
 private:
-	Thing<int> s1;
-	Thing<double> s2;
+	TT item;
+	static int ct;
 public:
-	Crab() {};
-	// assumes the thing class has push() and pop() members
-	bool push(int a, double x) { return s1.push(a) && s2.push(x); }
-	bool pop(int & a, double & x) { return s1.pop(a) && s2.pop(x); }
+	HasFriendT(const TT & i) : item(i) { ct++; }
+	~HasFriendT() { ct--; }
+	friend void counts<TT>();
+	friend void report<>(HasFriendT<TT> &);
 };
 
+template <typename T>
+int HasFriendT<T>::ct = 0;
+
+// template friend functions definitions
+template <typename T>
+void counts()
+{
+	cout << "template size: " << sizeof(HasFriendT<T>) << "; ";
+	cout << "template counts(): " << HasFriendT<T>::ct << endl;
+}
+
+template <typename T>
+void report(T & hf)
+{
+	cout << hf.item << endl;
+}
 
 int main(void)
 {
-	Crab<Stack> nebula;
-// Stack must match template <typename T> class thing
-	int ni;
-	double nb;
-	cout << "Enter int double pairs, such as 4 3.5 (0 0 to end):\n";
-	while (cin >> ni >> nb && ni > 0 && nb > 0)
-	{
-		if (!nebula.push(ni, nb))
-			break;
-	}
-
-	while (nebula.pop(ni, nb))
-		cout << ni << ", " << nb << endl;
-	cout << "Done.\n";
+	counts<int>();
+	HasFriendT<int> hfi1(10);
+	HasFriendT<int> hfi2(20);
+	HasFriendT<double> hfdb(10.5);
+	report(hfi1);  // generate report(HasFriendT<int> &)
+	report(hfi2);  // generate report(HasFriendT<int> &)
+	report(hfdb);  // generate report(HasFriendT<double> &)
+	cout << "counts<int>() output:\n";
+	counts<int>();
+	cout << "counts<double>() output:\n";
+	counts<double>();
 	cin.get();
 	cin.get();
 	return 0;
