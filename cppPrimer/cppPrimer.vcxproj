@@ -223,6 +223,7 @@
     <ClCompile Include="stonewt.cpp" />
     <ClCompile Include="stringGood.cpp" />
     <ClCompile Include="tabtenn0.cpp" />
+    <ClCompile Include="tempmemb.h" />
     <ClCompile Include="vect.cpp" />
     <ClCompile Include="worker0.cpp" />
   </ItemGroup>

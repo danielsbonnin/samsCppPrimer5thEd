@@ -31,28 +31,16 @@
 #include "stacktp.h"
 #include "arraytp.h"
 #include "apair.h"
+#include "tempmemb.h"
 using namespace std;
 
 int main(void)
 {
-	APair<string, int> ratings[4] =
-	{
-		APair<string, int>("The Purple Duke", 5),
-		APair<string, int>("Jake's Frisco Al Fresco", 4),
-		APair<string, int>("Mont Souffle", 5),
-		APair<string, int>("Gertie's Eats", 3)
-	};
+	beta<double> guy(3.5, 3);
 
-	int joints = sizeof(ratings) / sizeof(APair<string, int>);
-	cout << "Rating:\t Eatery\n";
-	for (int i = 0; i < joints; i++)
-		cout << ratings[i].second() << ":\t "
-		<< ratings[i].first() << endl;
-	cout << "Oops! Revised rating:\n";
-	ratings[3].first() = "Gertie's Fab Eats";
-	ratings[3].second() = 6;
-	cout << ratings[3].second() << ":\t "
-		<< ratings[3].first() << endl;
+	guy.Show();
+	cout << guy.blab(10, 2.3) << endl;
+	cout << "Done\n";
 	cin.get();
 	cin.get();
 	return 0;

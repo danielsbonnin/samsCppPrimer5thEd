@@ -239,5 +239,8 @@
     <ClCompile Include="worker0.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tempmemb.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
